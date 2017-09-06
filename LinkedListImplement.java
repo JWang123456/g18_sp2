@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 public class LinkedListImplement{
 
 	
-	public static<T extends Comparable<? super T>> void intersect(List<T> l1, List<T> l2, List<T> outList) 
+	public static<T extends Comparable<? super T>> List<T> intersect(List<T> l1, List<T> l2, List<T> outList) 
 	{
 		Collections.sort(l1);
 		Collections.sort(l2);
@@ -31,16 +31,18 @@ public class LinkedListImplement{
 	        	if(p1 < l1.size() - 1)
 	        	{
 	        		current1 = l1.get(p1+1);
-	        		p1 = p1 + 1;
 	        	}
+	        	p1 = p1 + 1;
+	        
 	        	
 	        }else if(b > 0)
 	        {
 	        	if(p2 < l2.size() - 1)
 	        	{
 	        		current2 = l2.get(p2+1);
-	        		p2 = p2 + 1;
 	        	}
+	        	p2 = p2 + 1;
+	        	
 	        }else{
 	            
 	        	outList.add(j, current1);
@@ -50,13 +52,14 @@ public class LinkedListImplement{
 	            {	  	
 	            	current1 = l1.get(p1+1);
 	            	current2 = l2.get(p2+1);
-		            p1 = p1 + 1;
-			        p2 = p2 + 1;
-	            } 
+	            }
+		        p1 = p1 + 1;
+			    p2 = p2 + 1;
+	             
 	        }
 	    }
 	
-	    return;
+	    return outList;
 	}
 	
 	//@SuppressWarnings("null")
