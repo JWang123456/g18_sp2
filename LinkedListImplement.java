@@ -1,5 +1,6 @@
 package cs6301.g18Sp2;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -16,44 +17,81 @@ public class LinkedListImplement{
 			
 	    int p1=0;
 	    int p2=0;
-	    
+	    int j = 0;
+        
 	    T current1 = l1.get(p1);
 	    T current2 = l2.get(p2);
 	    
 	    
-	    while(current1 != null && current2 != null)
+	    while(p1 < l1.size() && p2 < l2.size())
 	    {
-	    	int b = current1.compareTo(current2)
+	    	int b = current1.compareTo(current2);
 	        if(b < 0)
 	        {
-	        	current1 = l1.get(p1+1);
+	        	if(p1 < l1.size() - 1)
+	        	{
+	        		current1 = l1.get(p1+1);
+	        		p1 = p1 + 1;
+	        	}
+	        	
 	        }else if(b > 0)
 	        {
-	        	current2 = l2.get(p1+1);
+	        	if(p2 < l2.size() - 1)
+	        	{
+	        		current2 = l2.get(p2+1);
+	        		p2 = p2 + 1;
+	        	}
 	        }else{
-	            outList.add(current1);
-	            current1 = l1.get(p1+1);
-	            current2 = l2.get(p1+1);
+	            
+	        	outList.add(j, current1);
+	        	j++;
+	        	
+	            if(p1 < l1.size() - 1 && p2 < l2.size() - 1)
+	            {	  	
+	            	current1 = l1.get(p1+1);
+	            	current2 = l2.get(p2+1);
+		            p1 = p1 + 1;
+			        p2 = p2 + 1;
+	            } 
 	        }
 	    }
 	
 	    return;
 	}
-
-	public static void main(String[] args) throws FileNotFoundException 
+	
+	//@SuppressWarnings("null")
+	public static List<Integer> readList(Scanner in)
 	{
-		Scanner in1;
-		Scanner in2;
+		int i = 0;
+		List<Integer> l = new ArrayList<Integer>();
+		
+		while(in.hasNextInt())
+		{
+			l.add(i, in.nextInt());
+			i++;
+		}
+		return l;
+			
+	}
+
+	public static <T extends Comparable<? super T>> void main(String[] args) throws FileNotFoundException 
+	{
+		
+		List<Integer> outList = new ArrayList<Integer>();
 
 		File list1 = new File("list1.in");
-		in1 = new Scanner(list1);
+		Scanner in1 = new Scanner(list1);
 		File list2 = new File("list2.in");
-		in2 = new Scanner(list2);
+		Scanner in2 = new Scanner(list2);
 		
-		
-		LinkedListImplement L = new LinkedListImplement();
-		L.intersect(in1, in2);
+		List<Integer> l1 = readList(in1);
+		List<Integer> l2 = readList(in2);
+		System.out.println(l1);
+		System.out.println(l2);
+		System.out.println("start");
+		LinkedListImplement.intersect(l1, l2, outList);
 		System.out.println(outList);
+		System.out.println("done");
 
 
 	}
