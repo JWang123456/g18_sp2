@@ -1,6 +1,5 @@
 package cs6301.g18_sp2;
 
-import java.util.Collections;
 import java.util.List;
 
 public class LinkedListSets<T>  {
@@ -16,7 +15,6 @@ public class LinkedListSets<T>  {
 		for(T element: l1) {
 			if(l2.contains(element)) outList.add(element);
 		}
-		Collections.sort(outList);
 	}
 	
 	public static<T extends Comparable<? super T>> void union(List<T> l1, List<T> l2, List<T> outList) {
@@ -26,21 +24,21 @@ public class LinkedListSets<T>  {
 			outList.add(element);
 		}
 		for(T element: l2) {
-			if(!outList.contains(element)) outList.add(element);
+			if(!outList.contains(element)) outList.add(element); //Merge
 		}
-		Collections.sort(outList);
+		// Collections.sort(outList);
 	}
 
 	public static<T extends Comparable<? super T>> void difference(List<T> l1, List<T> l2, List<T> outList) {
 	   // Return l1 - l2 (i.e, items in l1 that are not in l2), in sorted order.
 	   // Output is a set, so it should have no duplicates.
 		for(T element: l1) {
-			if(!l2.contains(element)) outList.add(element);
+			if(!l2.contains(element)) outList.add(element); //Merge
 		}
 		for(T element: l2) {
-			if(!l1.contains(element)) outList.add(element);
+			if(!l1.contains(element)) outList.add(element); //Merge
 		}
-		Collections.sort(outList);
+		// Collections.sort(outList);
 	}
 	
 	
