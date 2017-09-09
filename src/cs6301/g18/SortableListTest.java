@@ -1,4 +1,4 @@
-package cs6301.g18_sp2;
+package cs6301.g18;
 
 public class SortableListTest {
 	public static void main(String[] args) throws CloneNotSupportedException {
@@ -8,7 +8,15 @@ public class SortableListTest {
 			list.add(new Integer(i));
 			i = i - 1;
 		}
+//		list.add(133);
+//		list.add(6);
+//		list.add(159);
+//		list.add(83);
+//		list.add(100);
+		
+		System.out.println("The original list is ");
 		list.printList();
+		System.out.println("After sorting: ");
 		SortableList.mergeSort(list);
 	}
 }
