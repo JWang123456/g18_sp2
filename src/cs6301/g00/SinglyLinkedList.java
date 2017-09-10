@@ -10,6 +10,7 @@ package cs6301.g00;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Scanner;
+
 import java.util.NoSuchElementException;
 
 public class SinglyLinkedList<T> implements Iterable<T> {
@@ -28,12 +29,12 @@ public class SinglyLinkedList<T> implements Iterable<T> {
     // Dummy header is used.  tail stores reference of tail element of list
     protected Entry<T> head;
 	protected Entry<T> tail;
-    private int size;
+    protected int size;
 
     public SinglyLinkedList() {
         head = new Entry<>(null, null);
         tail = head;
-        setSize(0);
+        size = 0;
     }
 
     public Iterator<T> iterator() { return new SLLIterator<>(this); }
@@ -74,7 +75,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	    }
 	    cursor = prev;
 	    ready = false;  // Calling remove again without calling next will result in exception thrown
-	    setSize(getSize() - 1);
+	    size--;
 	}
     }
 
@@ -82,7 +83,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
     public void add(T x) {
 	tail.next = new Entry<>(x, null);
 	tail = tail.next;
-	setSize(getSize() + 1);
+	size++;
     }
 
     public void printList() {
@@ -95,7 +96,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         }
 	*/
 
-	System.out.print(this.getSize() + ": ");
+	System.out.print(this.size + ": ");
 	for(T item: this) {
 	    System.out.print(item + " ");
 	}
@@ -107,7 +108,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
     // followed by the elements at odd index. Implemented by rearranging pointers
     // of existing elements without allocating any new elements.
     public void unzip() {
-	if(getSize() < 3) {  // Too few elements.  No change.
+	if(size < 3) {  // Too few elements.  No change.
 	    return;
 	}
 
@@ -137,7 +138,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	tail0.next = head1;
 	tail1.next = null;
     }
-    
+
     void multiUnzip(int k) {
        	// Rearrange elements of a singly linked list by chaining
        	// together elements that are k apart.  k=2 is the unzip
@@ -145,7 +146,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
     	// 1..10 in order, after multiUnzip(3), the elements will be
        	// rearranged as: 1 4 7 10 2 5 8 3 6 9.  Instead if we call
     	// multiUnzip(4), the list 1..10 will become 1 5 9 2 6 10 3 7 4 8.
-    	if(getSize() < k + 1) {  // Too few elements.  No change.
+    	if(size < k + 1) {  // Too few elements.  No change.
     	    return;
     	}
     	
@@ -179,39 +180,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
     	}
     	tail[k - 1].next = null;
     	
-    	/*
-    	Entry<T> tail0 = head.next;
-    	Entry<T> head1 = tail0.next;
-    	Entry<T> tail1 = head1;
-    	Entry<T> head2 = tail1.next;
-    	Entry<T> tail2 = head2;
-    	Entry<T> c = tail2.next;
-    	int state = 0;
-    	while(c != null) {
-    	    if(state == 0) {
-	    		tail0.next = c;
-	    		tail0 = c;
-	    		c = c.next;
-    	    } 
-    	    if(state == 1){
-	    		tail1.next = c;
-	    		tail1 = c;
-	    		c = c.next;
-    	    }
-    	    if(state == 2) {
-	    	    tail2.next = c;
-	        	tail2 = c;
-	        	c = c.next;
-    	    }
-    	    state++;
-    	    if(state > 2) state -= 3;
-    	}
-    	tail0.next = head1;
-    	tail1.next = head2;
-    	tail2.next = null;
-    	*/
-        }
 
+        }
+    
     public static void main(String[] args) throws NoSuchElementException {
         int n = 10;
         if(args.length > 0) {
@@ -247,17 +218,9 @@ public class SinglyLinkedList<T> implements Iterable<T> {
 	}
 	lst.printList();
 	//lst.unzip();
-	lst.multiUnzip(5);
+	lst.multiUnzip(7);
         lst.printList();
     }
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
 }
 
 /* Sample input:

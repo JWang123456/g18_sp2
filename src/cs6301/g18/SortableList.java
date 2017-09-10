@@ -17,7 +17,7 @@ class SortableList<T extends Comparable<? super T>> extends SinglyLinkedList<T> 
 	void divide() {
 		list1 = new SortableList<T>();
 		list2 = new SortableList<T>();
-    	int size = this.getSize();
+    	int size = this.size;
     	Entry<T> cur = this.head.next;
     	int i = 0;
     	for(i = 0; i < size / 2; i++) {
@@ -32,14 +32,14 @@ class SortableList<T extends Comparable<? super T>> extends SinglyLinkedList<T> 
 	
     void mergeSort()  { // Sort this list
     	if(ans == null) ans = new SortableList<T>();
-    	if(this.getSize() < 2) {
+    	if(this.size < 2) {
     		for(Object element: this) {
     			ans.add(element);
     		}
     		ans.printList();
     		return;
     	}
-    	if(this.getSize() == 2) {
+    	if(this.size == 2) {
     		SortableList temp = new SortableList();
     		if(this.head.next.element.compareTo(this.tail.element) > 0) {
     			temp.add(this.tail.element);
@@ -52,7 +52,7 @@ class SortableList<T extends Comparable<? super T>> extends SinglyLinkedList<T> 
     		ans.printList();
     		return;
     	}
-    	if(this.getSize() > 2) {
+    	if(this.size > 2) {
     		this.divide();
     		this.list1.mergeSort();
     		this.list2.mergeSort();
